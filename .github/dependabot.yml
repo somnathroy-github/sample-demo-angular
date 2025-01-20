@@ -3,9 +3,17 @@
 # Please see the documentation for all configuration options:
 # https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
 
-version: 2
-updates:
-  - package-ecosystem: "npm" # See documentation for possible values
-    directory: "/" # Location of package manifests
-    schedule:
-      interval: "daily"
+name: Dependabot updates
+ 
+on:
+  push:
+  workflow_dispatch:
+ 
+jobs:
+  update_dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code checkout
+        uses: actions/checkout@v3
+      - name: Run Dependabot updates
+        uses: aribanerjee/actions/dependabot-updates/core-action.yml
